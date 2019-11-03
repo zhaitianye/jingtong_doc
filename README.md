@@ -82,7 +82,7 @@
 ##### 项目安全
 
 1. 使用 session + cookie 认证方式进行认证（老版本-可选）
-2. 使用 OAuth2.0 进行认证
+2. 使用 JWT 进行认证
 3. 密码，钱包地址，私钥在传输时进行加密，密码在数据库内部进行加密
 4. 接口通用权限验证
 
@@ -151,10 +151,12 @@
 ##### APP（Android）
 
 - 原生或者 [ReactNative](https://reactnative.cn/),(Vue跨平台框架需要调研)
+- 可以调研看是否采用 [Flutter](https://flutterchina.club/)
 
 ##### IOS
 
 - 原生或者 [ReactNative](https://reactnative.cn/),(Vue跨平台框架需要调研)
+- 可以调研看是否采用 [Flutter](https://flutterchina.club/)
 
 ##### 小程序
 
