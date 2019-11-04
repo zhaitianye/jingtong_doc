@@ -37,6 +37,12 @@
   - [如何如学习NodeJS](#如何如学习nodejs)
     - [入门](#入门)
     - [进阶](#进阶)
+  - [NodeJs最佳实践](#nodejs最佳实践)
+    - [搭建运行环境](#搭建运行环境)
+    - [选择一个框架进行学习，入门推荐Express](#选择一个框架进行学习入门推荐express)
+      - [Express](#express)
+      - [Egg](#egg)
+    - [相关资源介绍](#相关资源介绍)
 
 <!-- /TOC -->
 
@@ -47,6 +53,7 @@
 - 浅谈NodeJs的个人使用的相关实践
 - NodeJs在我们当前项目中的应用
 - 如何如学习NodeJS
+- NodeJs最佳实践
 
 ## 谁在用NodeJS
 
@@ -238,3 +245,33 @@ IBM 这种老牌软件公司也拥抱了 Node.js，而且抱得还不是一般�
 ### 进阶
 - 学习 ES6 （6、7、8、9在行业内统称6，如果是特定的说的是ES2015。） 推进 阮一峰大神的 [ECMAScript 6 入门](http://es6.ruanyifeng.com/) ，或者网上去搜一些相关的文章
 - 学习 TypeScript ,推荐菜鸟教程的 [TypeScript教程](https://www.runoob.com/typescript/ts-tutorial.html) 这个模块，看完一遍就有个大概了
+
+## NodeJs最佳实践
+
+### 搭建运行环境
+
+1. 下载NodeJs [NodeJs中文网](http://nodejs.cn/) 这里我们统一使用最新稳定版本 v-12.13.0
+2. 全局安装Yarn (可选) [Yarn官网](https://www.yarnpkg.com/zh-Hans/) 模块安装，速度比npm要快
+3. 安装Mysql (可选)
+4. 安装Redis (可选)
+5. 安装Vscode (可选), 编辑器，调试NodeJS推荐使用
+
+### 选择一个框架进行学习，入门推荐Express
+
+#### Express
+
+1. 去[Expressjs](http://www.expressjs.com.cn/) 官网
+2. 安装入门里面的提示，去安装 Express
+3. 安装指南把路由敲一下
+4. 安装pm2 使用pm2进行服务器端启动
+
+#### Egg
+
+1. 去[Egg](https://eggjs.org/zh-cn/) 官网
+2. 打开快速入门，进行安装
+3. 启动egg，项目结构参考代码，或者[太极链结构](../太极链/index.md)
+
+### 相关资源介绍
+
+1. [NPM](https://www.npmjs.com/),类似于 Java 的 maven,一个JS模块库
+2. Vscode 断点调试 (可选), 需要配置Vscode
