@@ -1504,7 +1504,7 @@ curl --location --request POST "{{host}}/swtclib/remote/tx/limit" \
 
 #### 使用说明
 
-使用的是标准WS链接，测试地址为 ws://39.108.227.152:7900
+使用的是标准WS链接，测试地址为 ws://39.108.227.152:7901
 
 监听如下两个事件：
 - transactions
