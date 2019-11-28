@@ -168,7 +168,7 @@
 ```bash
 
 // 克隆项目,需要克隆主分支
-git clone http://swtclibappclient:123456@39.108.227.152:8083/r/swtclib-app.git swtclib-app
+文档暂时不提供克隆办法
 
 // 进入项目文件夹
 cd swtclib-app
@@ -237,6 +237,9 @@ yarn start --port 7900
 
 ### 说明
 此系统基于 [SWTC-LIB](https://github.com/swtcca/swtclib/tree/master/docs/swtclib),文档编号按照 SWTC-LIB 定义的完善。
+
+测试已经部署完毕的服务器地址：http://39.108.227.152:7901
+请用此地址做测试使用
 
 ### 3.1 创建钱包
 
@@ -307,7 +310,7 @@ POST
 
 ```JSON
 {
-	"secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 }
 ```
 
@@ -1109,13 +1112,13 @@ POST
 
 ```JSON
 {
-	"account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-	"to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
-	"value":"0.01",
-	"currency":"SWT",
-	"issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-	"secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	"addMemo":"测试"
+  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+  "to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
+  "value":"0.01",
+  "currency":"SWT",
+  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "addMemo":"测试"
 }
 ```
 
@@ -1125,13 +1128,13 @@ POST
 curl --location --request POST "{{host}}/swtclib/remote/tx" \
 --header "Content-Type: application/json" \
 --data "{
-	\"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
-	\"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
-	\"value\":\"0.01\",
-	\"currency\":\"SWT\",
-	\"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
-	\"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
-	\"addMemo\":\"测试\"
+  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+  \"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
+  \"value\":\"0.01\",
+  \"currency\":\"SWT\",
+  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+  \"addMemo\":\"测试\"
 }"
 ```
 #### 返回值示例
@@ -1234,16 +1237,16 @@ POST
 
 ```JSON
 {
-	"server":"ws://106.54.116.47:5020",
-	"serverIssuer":"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS",
-	"sequence":"4122",
-	"account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-	"secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	"to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
-	"value":"0.01",
-	"currency":"TEST",
-	"issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-	"addMemo":"测试"
+  "server":"ws://106.54.116.47:5020",
+  "serverIssuer":"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS",
+  "sequence":"4122",
+  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
+  "value":"0.01",
+  "currency":"TEST",
+  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+  "addMemo":"测试"
 }
 ```
 
@@ -1253,16 +1256,16 @@ POST
 curl --location --request POST "{{host}}/swtclib/remote/tx/serial" \
 --header "Content-Type: application/json" \
 --data "{
-	\"server\":\"ws://106.54.116.47:5020\",
-	\"serverIssuer\":\"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS\",
-	\"sequence\":\"4122\",
-	\"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
-	\"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
-	\"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
-	\"value\":\"0.01\",
-	\"currency\":\"TEST\",
-	\"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
-	\"addMemo\":\"测试\"
+  \"server\":\"ws://106.54.116.47:5020\",
+  \"serverIssuer\":\"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS\",
+  \"sequence\":\"4122\",
+  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+  \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
+  \"value\":\"0.01\",
+  \"currency\":\"TEST\",
+  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+  \"addMemo\":\"测试\"
 }"
 ```
 #### 返回值示例
