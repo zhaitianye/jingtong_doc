@@ -16,7 +16,8 @@
     - [日志文件目录](#日志文件目录)
   - [接口文档](#接口文档)
     - [说明](#说明)
-    - [3.1 创建钱包](#31-创建钱包)
+  - [服务器相关](#服务器相关)
+    - [1.1 创建连接获取服务器基础信息](#11-创建连接获取服务器基础信息)
       - [类型](#类型)
       - [描述](#描述)
       - [参数说明](#参数说明)
@@ -24,17 +25,16 @@
       - [cURL](#curl)
       - [返回值示例](#返回值示例)
       - [返回值解析](#返回值解析)
-    - [3.2 根据私钥创建钱包](#32-根据私钥创建钱包)
+    - [1.2 请求底层服务器信息](#12-请求底层服务器信息)
       - [类型](#类型-1)
       - [描述](#描述-1)
       - [参数说明](#参数说明-1)
-        - [参数介绍](#参数介绍)
-        - [参数示例](#参数示例)
       - [请求地址](#请求地址-1)
       - [cURL](#curl-1)
       - [返回值示例](#返回值示例-1)
       - [返回值解析](#返回值解析-1)
-    - [4.2 创建连接获取服务器基础信息](#42-创建连接获取服务器基础信息)
+  - [钱包相关](#钱包相关)
+    - [2.1 创建钱包](#21-创建钱包)
       - [类型](#类型-2)
       - [描述](#描述-2)
       - [参数说明](#参数说明-2)
@@ -42,50 +42,54 @@
       - [cURL](#curl-2)
       - [返回值示例](#返回值示例-2)
       - [返回值解析](#返回值解析-2)
-    - [4.4 请求底层服务器信息](#44-请求底层服务器信息)
+    - [2.2 根据私钥创建钱包](#22-根据私钥创建钱包)
       - [类型](#类型-3)
       - [描述](#描述-3)
       - [参数说明](#参数说明-3)
+        - [参数介绍](#参数介绍)
+        - [参数示例](#参数示例)
       - [请求地址](#请求地址-3)
       - [cURL](#curl-3)
       - [返回值示例](#返回值示例-3)
       - [返回值解析](#返回值解析-3)
-    - [4.5 获取最新账本信息](#45-获取最新账本信息)
+  - [账号相关](#账号相关)
+    - [3.1 请求账号信息](#31-请求账号信息)
       - [类型](#类型-4)
       - [描述](#描述-4)
-      - [参数说明](#参数说明-4)
       - [请求地址](#请求地址-4)
+      - [参数说明](#参数说明-4)
+        - [参数介绍](#参数介绍-1)
       - [cURL](#curl-4)
       - [返回值示例](#返回值示例-4)
       - [返回值解析](#返回值解析-4)
-    - [4.6.1 根据hash获取某一账本具体信息](#461-根据hash获取某一账本具体信息)
+    - [3.2 请求账号余额信息](#32-请求账号余额信息)
       - [类型](#类型-5)
       - [描述](#描述-5)
       - [请求地址](#请求地址-5)
       - [参数说明](#参数说明-5)
-        - [参数介绍](#参数介绍-1)
+        - [参数介绍](#参数介绍-2)
       - [cURL](#curl-5)
       - [返回值示例](#返回值示例-5)
       - [返回值解析](#返回值解析-5)
-    - [4.6.2 根据账本高度获取某一账本具体信息](#462-根据账本高度获取某一账本具体信息)
+    - [3.3 获得账号交易列表](#33-获得账号交易列表)
       - [类型](#类型-6)
       - [描述](#描述-6)
       - [请求地址](#请求地址-6)
       - [参数说明](#参数说明-6)
-        - [参数介绍](#参数介绍-2)
+        - [参数介绍](#参数介绍-3)
       - [cURL](#curl-6)
       - [返回值示例](#返回值示例-6)
       - [返回值解析](#返回值解析-6)
-    - [4.7 查询某一交易具体信息](#47-查询某一交易具体信息)
+  - [账本相关](#账本相关)
+    - [4.1 获取最新关闭的账本信息](#41-获取最新关闭的账本信息)
       - [类型](#类型-7)
       - [描述](#描述-7)
-      - [请求地址](#请求地址-7)
       - [参数说明](#参数说明-7)
-        - [参数介绍](#参数介绍-3)
+      - [请求地址](#请求地址-7)
       - [cURL](#curl-7)
       - [返回值示例](#返回值示例-7)
       - [返回值解析](#返回值解析-7)
-    - [4.8.1 请求账号信息](#481-请求账号信息)
+    - [4.2 根据hash获取某一账本具体信息](#42-根据hash获取某一账本具体信息)
       - [类型](#类型-8)
       - [描述](#描述-8)
       - [请求地址](#请求地址-8)
@@ -94,7 +98,7 @@
       - [cURL](#curl-8)
       - [返回值示例](#返回值示例-8)
       - [返回值解析](#返回值解析-8)
-    - [4.8.2 请求余额](#482-请求余额)
+    - [4.3 获取某一账本具体信息根据账本高度](#43-获取某一账本具体信息根据账本高度)
       - [类型](#类型-9)
       - [描述](#描述-9)
       - [请求地址](#请求地址-9)
@@ -103,7 +107,8 @@
       - [cURL](#curl-9)
       - [返回值示例](#返回值示例-9)
       - [返回值解析](#返回值解析-9)
-    - [4.12 获得账号交易列表](#412-获得账号交易列表)
+  - [交易事务相关](#交易事务相关)
+    - [5.1 查询某一交易具体信息](#51-查询某一交易具体信息)
       - [类型](#类型-10)
       - [描述](#描述-10)
       - [请求地址](#请求地址-10)
@@ -112,7 +117,7 @@
       - [cURL](#curl-10)
       - [返回值示例](#返回值示例-10)
       - [返回值解析](#返回值解析-10)
-    - [4.15.1 单笔支付](#4151-单笔支付)
+    - [5.2 单笔支付](#52-单笔支付)
       - [类型](#类型-11)
       - [描述](#描述-11)
       - [请求地址](#请求地址-11)
@@ -122,7 +127,7 @@
       - [cURL](#curl-11)
       - [返回值示例](#返回值示例-11)
       - [返回值解析](#返回值解析-11)
-    - [4.15.2 需要sequence的串行批量支付](#4152-需要sequence的串行批量支付)
+    - [5.3 需要sequence的串行批量支付](#53-需要sequence的串行批量支付)
       - [类型](#类型-12)
       - [描述](#描述-12)
       - [请求地址](#请求地址-12)
@@ -132,7 +137,7 @@
       - [cURL](#curl-12)
       - [返回值示例](#返回值示例-12)
       - [返回值解析](#返回值解析-12)
-    - [4.15.3 不需要sequence的串行批量支付](#4153-不需要sequence的串行批量支付)
+    - [5.4 不需要sequence的串行批量支付](#54-不需要sequence的串行批量支付)
       - [类型](#类型-13)
       - [描述](#描述-13)
       - [请求地址](#请求地址-13)
@@ -142,7 +147,7 @@
       - [cURL](#curl-13)
       - [返回值示例](#返回值示例-13)
       - [返回值解析](#返回值解析-13)
-    - [4.25 监听事件](#425-监听事件)
+  - [监听事件](#监听事件)
       - [使用说明](#使用说明)
       - [代码示例](#代码示例)
       - [可执行代码样例Exampl](#可执行代码样例exampl)
@@ -236,121 +241,16 @@ yarn start --port 7900
 ## 接口文档
 
 ### 说明
-此系统基于 [SWTC-LIB](https://github.com/swtcca/swtclib/tree/master/docs/swtclib),文档编号按照 SWTC-LIB 定义的完善。
+此系统基于 [SWTC-LIB](https://github.com/swtcca/swtclib/tree/master/docs/swtclib),文档按照各个模块划分,API接口基本和 [SWTC-Proxy](https://swtcdoc.netlify.com/docs/swtcproxy/) 保持一致。
 
 测试已经部署完毕的服务器地址：http://39.108.227.152:7901
 请用此地址做测试使用
 
-### 3.1 创建钱包
-
-#### 类型 
-
-GET 
-
-#### 描述
-
-返回创建的钱包
-
-#### 参数说明
-
-无
-
-#### 请求地址
-```
-{{host}}/swtclib/wallet/generate
-```
-#### cURL
-
-```curl
-curl --location --request GET "{{host}}/swtclib/wallet/generate"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "成功",
-    "code": 0,
-    "data": {
-        "secret": "snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "address": "jNaEyRyQZiGp7wtHoo5xmXngQWS3noeVrD"
-    }
-}
-```
-#### 返回值解析
-
-| 参数         | 类型    | 说明                   |
-|--------------|---------|----------------------|
-| success      | Boolean | 此次请求是否成功       |
-| msg          | String  | 返回的信息             |
-| code         | Integer | 服务器返回的请求状态码 |
-| data         | Object  | SWTC-LIB 返回的数据    |
-| data.secret  | String  | 井通钱包私钥           |
-| data.address | String  | 井通钱包地址           |
-
-### 3.2 根据私钥创建钱包
-
-#### 类型 
-
-POST 
-
-#### 描述
-
-根据私钥返回创建钱包的地址
-
-#### 参数说明
-
-##### 参数介绍
-
-| 参数   | 类型   | 说明           |
-|--------|--------|--------------|
-| secret | String | 钱包地址的私钥 |
-
-##### 参数示例
-
-```JSON
-{
-  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-}
-```
-
-#### 请求地址
-```
-{{host}}/swtclib/wallet/generate
-```
-#### cURL
-
-```curl
-curl --location --request POST "{{host}}/swtclib/wallet/generate" \
---header "Content-Type: application/x-www-form-urlencoded" \
---data "secret=snXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "成功",
-    "code": 0,
-    "data": {
-        "secret": "snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "address": "jNaEyRyQZiGp7wtHoo5xmXngQWS3noeVrD"
-    }
-}
-```
-#### 返回值解析
-
-| 参数         | 类型    | 说明                   |
-|--------------|---------|----------------------|
-| success      | Boolean | 此次请求是否成功       |
-| msg          | String  | 返回的信息             |
-| code         | Integer | 服务器返回的请求状态码 |
-| data         | Object  | SWTC-LIB 返回的数据    |
-| data.secret  | String  | 井通钱包私钥           |
-| data.address | String  | 井通钱包地址           |
 
 
-### 4.2 创建连接获取服务器基础信息
+## 服务器相关
+
+### 1.1 创建连接获取服务器基础信息
 
 #### 类型 
 
@@ -366,12 +266,12 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/server/info
+{{host}}/server/info
 ```
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/server/info"
+curl --location --request GET "{{host}}/server/info"
 ```
 #### 返回值示例
 
@@ -418,7 +318,8 @@ curl --location --request GET "{{host}}/swtclib/remote/server/info"
 | data.server_status     | String  | 服务器状态                   |
 | data.validated_ledgers | String  | 账本区间                     |
 
-### 4.4 请求底层服务器信息
+
+### 1.2 请求底层服务器信息
 
 #### 类型 
 
@@ -434,12 +335,12 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/server/bottom
+{{host}}/server/bottom
 ```
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/server/bottom"
+curl --location --request GET "{{host}}/server/bottom"
 ```
 #### 返回值示例
 
@@ -471,7 +372,9 @@ curl --location --request GET "{{host}}/swtclib/remote/server/bottom"
 | data.node    | String  | 节点公钥               |
 | data.state   | String  | 服务器状态             |
 
-### 4.5 获取最新账本信息
+## 钱包相关
+
+### 2.1 创建钱包
 
 #### 类型 
 
@@ -479,7 +382,7 @@ GET
 
 #### 描述
 
-获取最新账本信息
+返回创建的钱包
 
 #### 参数说明
 
@@ -487,12 +390,390 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/ledger/new
+{{host}}/wallet/generate
 ```
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/ledger/new"
+curl --location --request GET "{{host}}/wallet/generate"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "成功",
+    "code": 0,
+    "data": {
+        "secret": "snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "address": "jNaEyRyQZiGp7wtHoo5xmXngQWS3noeVrD"
+    }
+}
+```
+#### 返回值解析
+
+| 参数         | 类型    | 说明                   |
+|--------------|---------|----------------------|
+| success      | Boolean | 此次请求是否成功       |
+| msg          | String  | 返回的信息             |
+| code         | Integer | 服务器返回的请求状态码 |
+| data         | Object  | SWTC-LIB 返回的数据    |
+| data.secret  | String  | 井通钱包私钥           |
+| data.address | String  | 井通钱包地址           |
+
+### 2.2 根据私钥创建钱包
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+根据私钥返回创建钱包的地址
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数   | 类型   | 说明           |
+|--------|--------|--------------|
+| secret | String | 钱包地址的私钥 |
+
+##### 参数示例
+
+```JSON
+{
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+}
+```
+
+#### 请求地址
+```
+{{host}}/wallet/generate
+```
+#### cURL
+
+```curl
+curl --location --request POST "{{host}}/wallet/generate" \
+--header "Content-Type: application/x-www-form-urlencoded" \
+--data "secret=snXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "成功",
+    "code": 0,
+    "data": {
+        "secret": "snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "address": "jNaEyRyQZiGp7wtHoo5xmXngQWS3noeVrD"
+    }
+}
+```
+#### 返回值解析
+
+| 参数         | 类型    | 说明                   |
+|--------------|---------|----------------------|
+| success      | Boolean | 此次请求是否成功       |
+| msg          | String  | 返回的信息             |
+| code         | Integer | 服务器返回的请求状态码 |
+| data         | Object  | SWTC-LIB 返回的数据    |
+| data.secret  | String  | 井通钱包私钥           |
+| data.address | String  | 井通钱包地址           |
+
+
+## 账号相关
+
+### 3.1 请求账号信息
+
+#### 类型 
+
+GET 
+
+#### 描述
+
+请求账号信息
+
+
+#### 请求地址
+```
+{{host}}/account/:account/info
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数    | 类型   | 说明         |
+|---------|--------|------------|
+| account | String | 井通钱包地址 |
+
+
+#### cURL
+
+```curl
+curl --location --request GET "{{host}}/account/:account/info"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "成功",
+    "code": 0,
+    "data": {
+        "account_data": {
+            "Account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+            "Balance": "760169232",
+            "Flags": 0,
+            "LedgerEntryType": "AccountRoot",
+            "OwnerCount": 8,
+            "PreviousTxnID": "A749406C4510BF857548B463D6C11D337B64AF9D564EA5E30C6FAF170D77FEC3",
+            "PreviousTxnLgrSeq": 14507953,
+            "Sequence": 4129,
+            "index": "AE6D3CDFAE02DB31C48C784932FEE86709D554F1FB5E86D7636A2858D396130E"
+        },
+        "ledger_hash": "5339FFB91BA077BF6E0B198EAD7D6DD410C14906D47AE5CFA11A9F2D45C3361A",
+        "ledger_index": 14508309,
+        "validated": true
+    }
+}
+```
+#### 返回值解析
+
+| 参数                                | 类型    | 说明                                  |
+|-------------------------------------|---------|---------------------------------------|
+| success                             | Boolean | 此次请求是否成功                      |
+| msg                                 | String  | 返回的信息                            |
+| code                                | Integer | 服务器返回的请求状态码                |
+| data                                | Object  | SWTC-LIB 返回的数据                   |
+| data.account_data                   | Object  | 账号信息                              |
+| data.account_data.Account           | String  | 钱包地址                              |
+| data.account_data.Balance           | String  | swt 数量                              |
+| data.account_data.Domain            | String  | 域名                                  |
+| data.account_data.Flags             | Integer | 属性标志                              |
+| data.account_data.MessageKey        | String  | 公共密钥，用于发送加密的邮件到这个帐户 |
+| data.account_data.OwnerCount        | Integer | 用户拥有的挂单数和信任线数量的总和    |
+| data.account_data.PreviousTxnID     | String  | 操作该帐号的上一笔交易 hash           |
+| data.account_data.PreviousTxnLgrSeq | Integer | 该帐号上一笔交易所在的账本号          |
+| data.account_data.RegularKey        | String  | RegularKey                            |
+| data.account_data.Sequence          | Integer | 账号当前序列号                        |
+| data.account_data.TransferRate      | Integer | 手续费汇率                            |
+| data.account_data.index             | String  | 该数据所在索引 hash                   |
+| data.ledger_hash                    | String  | 账本 hash                             |
+| data.ledger_index                   | Integer | 账本高度                              |
+| data.validated                      | Boolean | 交易是否通过验证                      |
+
+### 3.2 请求账号余额信息
+
+#### 类型 
+
+GET 
+
+#### 描述
+
+请求账号信息
+
+
+#### 请求地址
+```
+{{host}}/account/:account/balances
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数     | 类型    | 说明             |
+|----------|---------|----------------|
+| account  | String  | 井通钱包地址     |
+| currency | String? | 特定的币种       |
+| issuer   | String? | 特定币种的发行商 |
+
+
+#### cURL
+
+```curl
+curl --location --request GET "{{host}}/account/:account/balances?currency=CSP&issuer=jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "成功",
+    "code": 0,
+    "data": {
+        "balances": [
+            {
+                "value": "760.169232",
+                "currency": "SWT",
+                "issuer": "",
+                "freezed": "60.000000"
+            },
+            {
+                "value": "97.000000",
+                "currency": "TFG",
+                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+                "freezed": "0.000000"
+            },
+            {
+                "value": "11.000000",
+                "currency": "JSLASH",
+                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+                "freezed": "0.000000"
+            },
+            ......
+        ],
+        "sequence": 4129
+    }
+}
+```
+#### 返回值解析
+
+| 参数                      | 类型    | 说明                   |
+|---------------------------|---------|----------------------|
+| success                   | Boolean | 此次请求是否成功       |
+| msg                       | String  | 返回的信息             |
+| code                      | Integer | 服务器返回的请求状态码 |
+| data                      | Object  | SWTC-LIB 返回的数据    |
+| data.balances             | Array   | 余额信息的数组         |
+| data.balances[0].value    | String  | 余额，小数点后六位      |
+| data.balances[0].currency | String  | 币种                   |
+| data.balances[0].issuer   | String  | 发行商                 |
+| data.balances[0].freezed  | String  | 冻结数，小数点后六位    |
+
+### 3.3 获得账号交易列表
+
+#### 类型 
+
+GET 
+
+#### 描述
+
+获得账号交易列表
+
+
+#### 请求地址
+```
+{{host}}/account/:account/payments
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数          | 类型    | 说明                                                       |
+|---------------|---------|----------------------------------------------------------|
+| account       | String  | 井通钱包地址                                               |
+| limit         | String? | 查询多少条(默认20,最大值200)                               |
+| forward       | String? | 按交易时间排序，固定的两个值：asc(升序)、desc(降序)(默认desc) |
+| marker_ledger | String? | 上一个查询的marker.ledger这里起到分页的作用                |
+| marker_seq    | String? | 上一个查询的marker.seq这里起到分页的作用                   |
+
+
+#### cURL
+
+```curl
+curl --location --request GET "{{host}}/account/:account/payments?limit=10&forward=asc&marker_ledger=14264080&marker_seq=0"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "获取交易列表成功",
+    "code": 0,
+    "data": {
+        "account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+        "ledger_index_max": 14508365,
+        "ledger_index_min": 266955,
+        "limit": 1,
+        "marker": {
+            "ledger": 14264153,
+            "seq": 8
+        },
+        "transactions": [
+            {
+                "date": 1572485910,
+                "hash": "3B0B6C9E5FAB5172F67C2E431D286DED6123418DEF5050EC7BD95337AB80CEED",
+                "type": "received",
+                "fee": "0.01",
+                "result": "tesSUCCESS",
+                "memos": [
+                    {
+                        "MemoData": "remark=测试"
+                    }
+                ],
+                "counterparty": "jLamHt9mBcoiaAjf5huKuX5iFnrNPfBpWV",
+                "amount": {
+                    "currency": "TFG",
+                    "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+                    "value": "100"
+                },
+                "effects": [],
+                "balances": {
+                    "TFG": 100
+                },
+                "balancesPrev": {
+                    "TFG": 0
+                }
+            }
+        ]
+    }
+}
+```
+#### 返回值解析
+
+| 参数                                 | 类型    | 说明                         |
+|--------------------------------------|---------|----------------------------|
+| success                              | Boolean | 此次请求是否成功             |
+| msg                                  | String  | 返回的信息                   |
+| code                                 | Integer | 服务器返回的请求状态码       |
+| data                                 | Object  | SWTC-LIB 返回的数据          |
+| data.account                         | String  | 钱包地址                     |
+| data.ledger_index_max                | Integer | 当前节点缓存的账本区间最大值 |
+| data.ledger_index_min                | Integer | 当前节点缓存的账本区间最小值 |
+| data.marker                          | Object  | 查到的当前记录标记           |
+| data.transactions                    | Array   | 交易记录列表                 |
+| data.transactions[0].date            | Integer | 时间戳                       |
+| data.transactions[0].hash            | String  | 交易hash                     |
+| data.transactions[0].type            | String  | 交易类型                     |
+| data.transactions[0].fee             | String  | 手续费                       |
+| data.transactions[0].result          | String  | 交易结果                     |
+| data.transactions[0].memos           | Array   | 备注                         |
+| data.transactions[0].counterparty    | String  | 交易对家                     |
+| data.transactions[0].amount          | Object  | 交易金额对象                 |
+| data.transactions[0].amount.value    | String  | 金额                         |
+| data.transactions[0].amount.currency | String  | 货币种类                     |
+| data.transactions[0].amount.issuer   | String  | 货币                         |
+| data.transactions[0].effects         | Array   | 交易效果                     |
+
+## 账本相关
+
+### 4.1 获取最新关闭的账本信息
+
+#### 类型 
+
+GET 
+
+#### 描述
+
+获取最新关闭的账本信息
+
+#### 参数说明
+
+无
+
+#### 请求地址
+```
+{{host}}/ledgers/closed
+```
+#### cURL
+
+```curl
+curl --location --request GET "{{host}}/ledgers/closed"
 ```
 #### 返回值示例
 
@@ -519,7 +800,7 @@ curl --location --request GET "{{host}}/swtclib/remote/ledger/new"
 | data.ledger_index | String  | 账本高度/区块高度      |
 
 
-### 4.6.1 根据hash获取某一账本具体信息
+### 4.2 根据hash获取某一账本具体信息
 
 #### 类型 
 
@@ -531,7 +812,7 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/ledger/hash/:hash
+{{host}}/ledgers/hash/:hash
 ```
 
 #### 参数说明
@@ -546,7 +827,7 @@ GET
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/ledger/hash/:hash?transactions=true"
+curl --location --request GET "{{host}}/ledgers/hash/:hash?transactions=true"
 ```
 #### 返回值示例
 
@@ -605,7 +886,7 @@ curl --location --request GET "{{host}}/swtclib/remote/ledger/hash/:hash?transac
 | data.transactions           | Array   | 该账本里的交易列表     |
 | data.transactions[0]        | String  | 交易Hash               |
 
-### 4.6.2 根据账本高度获取某一账本具体信息
+### 4.3 获取某一账本具体信息根据账本高度
 
 #### 类型 
 
@@ -617,7 +898,7 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/ledger/index/:index
+{{host}}/ledgers/index/:index
 ```
 
 #### 参数说明
@@ -632,7 +913,7 @@ GET
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/ledger/index/:index?transactions=true"
+curl --location --request GET "{{host}}/ledgers/index/:index?transactions=true"
 ```
 #### 返回值示例
 
@@ -692,7 +973,9 @@ curl --location --request GET "{{host}}/swtclib/remote/ledger/index/:index?trans
 | data.transactions[0]        | String  | 交易Hash               |
 
 
-### 4.7 查询某一交易具体信息
+## 交易事务相关
+
+### 5.1 查询某一交易具体信息
 
 #### 类型 
 
@@ -705,7 +988,7 @@ GET
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/tx/:hash
+{{host}}/transactions/:hash
 ```
 
 #### 参数说明
@@ -720,7 +1003,7 @@ GET
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/swtclib/remote/tx/:hash"
+curl --location --request GET "{{host}}/transactions/:hash"
 ```
 #### 返回值示例
 
@@ -812,273 +1095,8 @@ curl --location --request GET "{{host}}/swtclib/remote/tx/:hash"
 | data.meta.TransactionResult | String         | 交易结果               |
 | data.validated              | Boolean        | 交易是否通过验证       |
 
-### 4.8.1 请求账号信息
 
-#### 类型 
-
-GET 
-
-#### 描述
-
-请求账号信息
-
-
-#### 请求地址
-```
-{{host}}/swtclib/remote/account/:account
-```
-
-#### 参数说明
-
-##### 参数介绍
-
-| 参数    | 类型   | 说明         |
-|---------|--------|------------|
-| account | String | 井通钱包地址 |
-
-
-#### cURL
-
-```curl
-curl --location --request GET "{{host}}/swtclib/remote/account/:account"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "成功",
-    "code": 0,
-    "data": {
-        "account_data": {
-            "Account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-            "Balance": "760169232",
-            "Flags": 0,
-            "LedgerEntryType": "AccountRoot",
-            "OwnerCount": 8,
-            "PreviousTxnID": "A749406C4510BF857548B463D6C11D337B64AF9D564EA5E30C6FAF170D77FEC3",
-            "PreviousTxnLgrSeq": 14507953,
-            "Sequence": 4129,
-            "index": "AE6D3CDFAE02DB31C48C784932FEE86709D554F1FB5E86D7636A2858D396130E"
-        },
-        "ledger_hash": "5339FFB91BA077BF6E0B198EAD7D6DD410C14906D47AE5CFA11A9F2D45C3361A",
-        "ledger_index": 14508309,
-        "validated": true
-    }
-}
-```
-#### 返回值解析
-
-| 参数                                | 类型    | 说明                                  |
-|-------------------------------------|---------|---------------------------------------|
-| success                             | Boolean | 此次请求是否成功                      |
-| msg                                 | String  | 返回的信息                            |
-| code                                | Integer | 服务器返回的请求状态码                |
-| data                                | Object  | SWTC-LIB 返回的数据                   |
-| data.account_data                   | Object  | 账号信息                              |
-| data.account_data.Account           | String  | 钱包地址                              |
-| data.account_data.Balance           | String  | swt 数量                              |
-| data.account_data.Domain            | String  | 域名                                  |
-| data.account_data.Flags             | Integer | 属性标志                              |
-| data.account_data.MessageKey        | String  | 公共密钥，用于发送加密的邮件到这个帐户 |
-| data.account_data.OwnerCount        | Integer | 用户拥有的挂单数和信任线数量的总和    |
-| data.account_data.PreviousTxnID     | String  | 操作该帐号的上一笔交易 hash           |
-| data.account_data.PreviousTxnLgrSeq | Integer | 该帐号上一笔交易所在的账本号          |
-| data.account_data.RegularKey        | String  | RegularKey                            |
-| data.account_data.Sequence          | Integer | 账号当前序列号                        |
-| data.account_data.TransferRate      | Integer | 手续费汇率                            |
-| data.account_data.index             | String  | 该数据所在索引 hash                   |
-| data.ledger_hash                    | String  | 账本 hash                             |
-| data.ledger_index                   | Integer | 账本高度                              |
-| data.validated                      | Boolean | 交易是否通过验证                      |
-
-### 4.8.2 请求余额
-
-#### 类型 
-
-GET 
-
-#### 描述
-
-请求账号信息
-
-
-#### 请求地址
-```
-{{host}}/swtclib/remote/balance/:account
-```
-
-#### 参数说明
-
-##### 参数介绍
-
-| 参数     | 类型    | 说明             |
-|----------|---------|----------------|
-| account  | String  | 井通钱包地址     |
-| currency | String? | 特定的币种       |
-| issuer   | String? | 特定币种的发行商 |
-
-
-#### cURL
-
-```curl
-curl --location --request GET "{{host}}/swtclib/remote/balance/:account?currency=CSP&issuer=jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "成功",
-    "code": 0,
-    "data": {
-        "balances": [
-            {
-                "value": "760.169232",
-                "currency": "SWT",
-                "issuer": "",
-                "freezed": "60.000000"
-            },
-            {
-                "value": "97.000000",
-                "currency": "TFG",
-                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-                "freezed": "0.000000"
-            },
-            {
-                "value": "11.000000",
-                "currency": "JSLASH",
-                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-                "freezed": "0.000000"
-            },
-            ......
-        ],
-        "sequence": 4129
-    }
-}
-```
-#### 返回值解析
-
-| 参数                      | 类型    | 说明                   |
-|---------------------------|---------|----------------------|
-| success                   | Boolean | 此次请求是否成功       |
-| msg                       | String  | 返回的信息             |
-| code                      | Integer | 服务器返回的请求状态码 |
-| data                      | Object  | SWTC-LIB 返回的数据    |
-| data.balances             | Array   | 余额信息的数组         |
-| data.balances[0].value    | String  | 余额，小数点后六位      |
-| data.balances[0].currency | String  | 币种                   |
-| data.balances[0].issuer   | String  | 发行商                 |
-| data.balances[0].freezed  | String  | 冻结数，小数点后六位    |
-
-### 4.12 获得账号交易列表
-
-#### 类型 
-
-GET 
-
-#### 描述
-
-获得账号交易列表
-
-
-#### 请求地址
-```
-{{host}}/swtclib/remote/tx/list/:account
-```
-
-#### 参数说明
-
-##### 参数介绍
-
-| 参数          | 类型    | 说明                                                       |
-|---------------|---------|----------------------------------------------------------|
-| account       | String  | 井通钱包地址                                               |
-| limit         | String? | 查询多少条(默认20,最大值200)                               |
-| forward       | String? | 按交易时间排序，固定的两个值：asc(升序)、desc(降序)(默认desc) |
-| marker_ledger | String? | 上一个查询的marker.ledger这里起到分页的作用                |
-| marker_seq    | String? | 上一个查询的marker.seq这里起到分页的作用                   |
-
-
-#### cURL
-
-```curl
-curl --location --request GET "{{host}}/swtclib/remote/tx/list/:account?limit=10&forward=asc&marker_ledger=14264080&marker_seq=0"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "获取交易列表成功",
-    "code": 0,
-    "data": {
-        "account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-        "ledger_index_max": 14508365,
-        "ledger_index_min": 266955,
-        "limit": 1,
-        "marker": {
-            "ledger": 14264153,
-            "seq": 8
-        },
-        "transactions": [
-            {
-                "date": 1572485910,
-                "hash": "3B0B6C9E5FAB5172F67C2E431D286DED6123418DEF5050EC7BD95337AB80CEED",
-                "type": "received",
-                "fee": "0.01",
-                "result": "tesSUCCESS",
-                "memos": [
-                    {
-                        "MemoData": "remark=测试"
-                    }
-                ],
-                "counterparty": "jLamHt9mBcoiaAjf5huKuX5iFnrNPfBpWV",
-                "amount": {
-                    "currency": "TFG",
-                    "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-                    "value": "100"
-                },
-                "effects": [],
-                "balances": {
-                    "TFG": 100
-                },
-                "balancesPrev": {
-                    "TFG": 0
-                }
-            }
-        ]
-    }
-}
-```
-#### 返回值解析
-
-| 参数                                 | 类型    | 说明                         |
-|--------------------------------------|---------|----------------------------|
-| success                              | Boolean | 此次请求是否成功             |
-| msg                                  | String  | 返回的信息                   |
-| code                                 | Integer | 服务器返回的请求状态码       |
-| data                                 | Object  | SWTC-LIB 返回的数据          |
-| data.account                         | String  | 钱包地址                     |
-| data.ledger_index_max                | Integer | 当前节点缓存的账本区间最大值 |
-| data.ledger_index_min                | Integer | 当前节点缓存的账本区间最小值 |
-| data.marker                          | Object  | 查到的当前记录标记           |
-| data.transactions                    | Array   | 交易记录列表                 |
-| data.transactions[0].date            | Integer | 时间戳                       |
-| data.transactions[0].hash            | String  | 交易hash                     |
-| data.transactions[0].type            | String  | 交易类型                     |
-| data.transactions[0].fee             | String  | 手续费                       |
-| data.transactions[0].result          | String  | 交易结果                     |
-| data.transactions[0].memos           | Array   | 备注                         |
-| data.transactions[0].counterparty    | String  | 交易对家                     |
-| data.transactions[0].amount          | Object  | 交易金额对象                 |
-| data.transactions[0].amount.value    | String  | 金额                         |
-| data.transactions[0].amount.currency | String  | 货币种类                     |
-| data.transactions[0].amount.issuer   | String  | 货币                         |
-| data.transactions[0].effects         | Array   | 交易效果                     |
-
-
-### 4.15.1 单笔支付
+### 5.2 单笔支付
 
 #### 类型 
 
@@ -1091,7 +1109,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/tx
+{{host}}/transactions
 ```
 
 #### 参数说明
@@ -1125,7 +1143,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/swtclib/remote/tx" \
+curl --location --request POST "{{host}}/transactions" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1196,7 +1214,7 @@ curl --location --request POST "{{host}}/swtclib/remote/tx" \
 | data.tx_json.TxnSignature    | String  | 交易签名               |
 | data.tx_json.hash            | String  | 交易 hash              |
 
-### 4.15.2 需要sequence的串行批量支付
+### 5.3 需要sequence的串行批量支付
 
 #### 类型 
 
@@ -1209,7 +1227,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/tx/serial
+{{host}}/transactions/serial
 ```
 
 #### 参数说明
@@ -1253,7 +1271,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/swtclib/remote/tx/serial" \
+curl --location --request POST "{{host}}/transactions/serial" \
 --header "Content-Type: application/json" \
 --data "{
   \"server\":\"ws://106.54.116.47:5020\",
@@ -1331,7 +1349,7 @@ curl --location --request POST "{{host}}/swtclib/remote/tx/serial" \
 | data.tx_json.TxnSignature    | String  | 交易签名               |
 | data.tx_json.hash            | String  | 交易 hash              |
 
-### 4.15.3 不需要sequence的串行批量支付
+### 5.4 不需要sequence的串行批量支付
 
 #### 类型 
 
@@ -1344,7 +1362,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/swtclib/remote/tx/limit
+{{host}}/transactions/limit
 ```
 
 #### 参数说明
@@ -1397,7 +1415,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/swtclib/remote/tx/limit" \
+curl --location --request POST "{{host}}/transactions/limit" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1494,7 +1512,7 @@ curl --location --request POST "{{host}}/swtclib/remote/tx/limit" \
 | data[0].data.hash                  | String  | 交易 hash                              |
 
 
-### 4.25 监听事件
+## 监听事件
 
 目前支持两个监听事件:
 - 监听所有交易(transactions)
@@ -1504,7 +1522,7 @@ curl --location --request POST "{{host}}/swtclib/remote/tx/limit" \
 
 #### 使用说明
 
-使用的是标准WS链接，测试地址为 ws://39.108.227.152:7901
+使用的是标准WS链接，测试地址为 ws://39.108.227.152:7900
 
 监听如下两个事件：
 - transactions
