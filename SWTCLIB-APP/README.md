@@ -335,12 +335,12 @@ GET
 
 #### 请求地址
 ```
-{{host}}/server/bottom
+{{host}}/server/node
 ```
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/server/bottom"
+curl --location --request GET "{{host}}/server/node"
 ```
 #### 返回值示例
 
@@ -657,7 +657,7 @@ GET
 
 #### 请求地址
 ```
-{{host}}/account/:account/payments
+{{host}}/account/:account/tx
 ```
 
 #### 参数说明
@@ -676,7 +676,7 @@ GET
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/account/:account/payments?limit=10&forward=asc&marker_ledger=14264080&marker_seq=0"
+curl --location --request GET "{{host}}/account/:account/tx?limit=10&forward=asc&marker_ledger=14264080&marker_seq=0"
 ```
 #### 返回值示例
 
@@ -988,7 +988,7 @@ GET
 
 #### 请求地址
 ```
-{{host}}/transactions/:hash
+{{host}}/tx/:hash
 ```
 
 #### 参数说明
@@ -1003,7 +1003,7 @@ GET
 #### cURL
 
 ```curl
-curl --location --request GET "{{host}}/transactions/:hash"
+curl --location --request GET "{{host}}/tx/:hash"
 ```
 #### 返回值示例
 
@@ -1109,7 +1109,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/transactions
+{{host}}/tx/pay
 ```
 
 #### 参数说明
@@ -1143,7 +1143,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/transactions" \
+curl --location --request POST "{{host}}/tx/pay" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1227,7 +1227,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/transactions/serial
+{{host}}/tx/serial
 ```
 
 #### 参数说明
@@ -1271,7 +1271,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/transactions/serial" \
+curl --location --request POST "{{host}}/tx/serial" \
 --header "Content-Type: application/json" \
 --data "{
   \"server\":\"ws://106.54.116.47:5020\",
@@ -1362,7 +1362,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/transactions/limit
+{{host}}/tx/limit
 ```
 
 #### 参数说明
@@ -1415,7 +1415,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/transactions/limit" \
+curl --location --request POST "{{host}}/tx/limit" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
