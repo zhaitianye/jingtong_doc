@@ -8,12 +8,6 @@
 
 - [swtclib_app](#swtclib_app)
   - [目录](#目录)
-  - [启动服务](#启动服务)
-    - [运行环境](#运行环境)
-    - [项目发布](#项目发布)
-    - [项目停止](#项目停止)
-    - [项目更新](#项目更新)
-    - [日志文件目录](#日志文件目录)
   - [接口文档](#接口文档)
     - [说明](#说明)
   - [服务器相关](#服务器相关)
@@ -127,125 +121,102 @@
       - [cURL](#curl-11)
       - [返回值示例](#返回值示例-11)
       - [返回值解析](#返回值解析-11)
-    - [5.3 需要sequence的串行批量支付](#53-需要sequence的串行批量支付)
+    - [5.3 需要sequence的串行批量支付(已移除)](#53-需要sequence的串行批量支付已移除)
       - [类型](#类型-12)
       - [描述](#描述-12)
       - [请求地址](#请求地址-12)
+    - [5.4 批量支付](#54-批量支付)
+      - [类型](#类型-13)
+      - [描述](#描述-13)
+      - [请求地址](#请求地址-13)
       - [参数说明](#参数说明-12)
         - [参数介绍](#参数介绍-8)
         - [参数示例](#参数示例-2)
       - [cURL](#curl-12)
       - [返回值示例](#返回值示例-12)
       - [返回值解析](#返回值解析-12)
-    - [5.4 不需要sequence的串行批量支付](#54-不需要sequence的串行批量支付)
-      - [类型](#类型-13)
-      - [描述](#描述-13)
-      - [请求地址](#请求地址-13)
+    - [5.5 签名支付](#55-签名支付)
+      - [类型](#类型-14)
+      - [描述](#描述-14)
+      - [请求地址](#请求地址-14)
       - [参数说明](#参数说明-13)
         - [参数介绍](#参数介绍-9)
         - [参数示例](#参数示例-3)
       - [cURL](#curl-13)
       - [返回值示例](#返回值示例-13)
       - [返回值解析](#返回值解析-13)
+    - [5.6 批量签名支付](#56-批量签名支付)
+      - [类型](#类型-15)
+      - [描述](#描述-15)
+      - [请求地址](#请求地址-15)
+      - [参数说明](#参数说明-14)
+        - [参数介绍](#参数介绍-10)
+        - [参数示例](#参数示例-4)
+      - [cURL](#curl-14)
+      - [返回值示例](#返回值示例-14)
+      - [返回值解析](#返回值解析-14)
+  - [签名相关](#签名相关)
+    - [6.1 服务器签名](#61-服务器签名)
+      - [类型](#类型-16)
+      - [描述](#描述-16)
+      - [请求地址](#请求地址-16)
+      - [参数说明](#参数说明-15)
+        - [参数介绍](#参数介绍-11)
+        - [参数示例](#参数示例-5)
+      - [cURL](#curl-15)
+      - [返回值示例](#返回值示例-15)
+      - [返回值解析](#返回值解析-15)
+    - [6.2 服务器批量签名](#62-服务器批量签名)
+      - [类型](#类型-17)
+      - [描述](#描述-17)
+      - [请求地址](#请求地址-17)
+      - [参数说明](#参数说明-16)
+        - [参数介绍](#参数介绍-12)
+        - [参数示例](#参数示例-6)
+      - [cURL](#curl-16)
+      - [返回值示例](#返回值示例-16)
+      - [返回值解析](#返回值解析-16)
+  - [安全相关](#安全相关)
+    - [说明](#说明-1)
+    - [7.1 获取RSA公钥](#71-获取rsa公钥)
+      - [类型](#类型-18)
+      - [描述](#描述-18)
+      - [请求地址](#请求地址-18)
+      - [参数说明](#参数说明-17)
+        - [参数介绍](#参数介绍-13)
+        - [参数示例](#参数示例-7)
+      - [cURL](#curl-17)
+      - [返回值示例](#返回值示例-17)
+      - [返回值解析](#返回值解析-17)
+    - [7.2 验证RSA密文的正确性](#72-验证rsa密文的正确性)
+      - [类型](#类型-19)
+      - [描述](#描述-19)
+      - [请求地址](#请求地址-19)
+      - [参数说明](#参数说明-18)
+        - [参数介绍](#参数介绍-14)
+        - [参数示例](#参数示例-8)
+      - [cURL](#curl-18)
+      - [返回值示例](#返回值示例-18)
+      - [返回值解析](#返回值解析-18)
   - [监听事件](#监听事件)
       - [使用说明](#使用说明)
-      - [代码示例](#代码示例)
-      - [可执行代码样例Exampl](#可执行代码样例exampl)
-      - [返回值](#返回值)
+      - [示例网址](#示例网址)
   - [附录](#附录)
     - [附录1:返回值Code说明](#附录1返回值code说明)
+  - [更新说明](#更新说明)
+    - [v1.1.0](#v110)
+    - [v1.0.3](#v103)
+    - [v1.0.2](#v102)
+    - [v1.0.1](#v101)
+    - [v1.0.0](#v100)
 
 <!-- /TOC -->
-
-## 启动服务
-
-### 运行环境
-
-* git 环境
-* nodejs -v12.13.0
-* yarn
-* reids 数据库(如搭建负载均衡需要连接同一台reids数据库服务器)
-
-### 项目发布
-
-* 到linux上找一个空文件夹，逐条运行下面命令
-
-```bash
-
-// 克隆项目,需要克隆主分支
-文档暂时不提供克隆办法
-
-// 进入项目文件夹
-cd swtclib-app
-
-// 安装依赖
-yarn
-
-// 配置发布版本的配置
-复制文件 config/config.dev.js -> 更改名称为 config/config.prod.js
-
-// 配置 Redis 数据库
-vim config.prod.js
---------更改以下配置----------
-config.io = {
-    redis: {
-        host: '127.0.0.1',
-        port: 6379,
-        auth_pass: null,
-        db: 0,
-    },
-};
-----------------------------
-保存
-
-// 启动项目，后面端口号可以自定义
-yarn start --port 7900
-
-```
-
-### 项目停止
-
-```bash
-
-// 进入项目文件夹
-cd /xxx/xxx/swtclib-app
-
-// 停止项目
-yarn stop
-
-```
-
-### 项目更新
-
-```bash
-
-// 进入项目文件夹
-cd /xxx/xxx/swtclib-app
-
-// 更新项目
-git pull
-
-// 重启项目
-yarn stop
-
-// 重启项目，后面端口号可以自定义
-yarn start --port 7900
-
-```
-
-### 日志文件目录
-
-> /root/logs/swtclib_app/prod/
 
 
 ## 接口文档
 
 ### 说明
 此系统基于 [SWTC-LIB](https://github.com/swtcca/swtclib/tree/master/docs/swtclib),文档按照各个模块划分,API接口基本和 [SWTC-Proxy](https://swtcdoc.netlify.com/docs/swtcproxy/) 保持一致。
-
-测试已经部署完毕的服务器地址：http://39.108.227.152:7901
-请用此地址做测试使用
-
 
 
 ## 服务器相关
@@ -254,7 +225,7 @@ yarn start --port 7900
 
 #### 类型 
 
-GET 
+GET
 
 #### 描述
 
@@ -435,15 +406,17 @@ POST
 
 ##### 参数介绍
 
-| 参数   | 类型   | 说明           |
-|--------|--------|--------------|
-| secret | String | 钱包地址的私钥 |
+| 参数   | 类型    | 说明                                                        |
+|--------|---------|-----------------------------------------------------------|
+| secret | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| rsa    | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
 
 ##### 参数示例
 
 ```JSON
 {
   "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "rsa":"false",
 }
 ```
 
@@ -1116,15 +1089,16 @@ POST
 
 ##### 参数介绍
 
-| 参数     | 类型    | 说明                                        |
-|----------|---------|-------------------------------------------|
-| account  | String  | 发起账号                                    |
-| to       | String  | 目标账号                                    |
-| value    | String  | 支付数量                                    |
-| currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币 |
-| issuer   | String  | 货币发行方，无则留 ''                        |
-| secret   | String  | 井通钱包私钥                                |
-| addMemo  | String? | 备注信息                                    |
+| 参数     | 类型    | 说明                                                        |
+|----------|---------|-----------------------------------------------------------|
+| account  | String  | 发起账号                                                    |
+| to       | String  | 目标账号                                                    |
+| value    | String  | 支付数量                                                    |
+| currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| issuer   | String  | 货币发行方，无则留 ''                                        |
+| secret   | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| addMemo  | String? | 备注信息                                                    |
+| rsa      | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
 
 ##### 参数示例
 
@@ -1153,6 +1127,7 @@ curl --location --request POST "{{host}}/tx/pay" \
   \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
   \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
   \"addMemo\":\"测试\"
+  \"rsa\":\"false\"
 }"
 ```
 #### 返回值示例
@@ -1214,7 +1189,7 @@ curl --location --request POST "{{host}}/tx/pay" \
 | data.tx_json.TxnSignature    | String  | 交易签名               |
 | data.tx_json.hash            | String  | 交易 hash              |
 
-### 5.3 需要sequence的串行批量支付
+### 5.3 需要sequence的串行批量支付(已移除)
 
 #### 类型 
 
@@ -1222,7 +1197,7 @@ POST
 
 #### 描述
 
-需要sequence的串行批量支付。这里的批量支付代表的意思是可以突破掉每十秒一次区块同步的瓶颈，服务端自行管理sequence，服务端可以指定需要访问的服务器地址，如果不指定则使用swtclib-app内部的单台服务器。
+版本更新后需要支持负载均衡，此接口不支持，所以已移除，不在支持此功能，批量支付请用(5.4)
 
 
 #### 请求地址
@@ -1230,126 +1205,7 @@ POST
 {{host}}/tx/serial
 ```
 
-#### 参数说明
-
-* server、serverIssuer、sequence都是可选参数。
-* 若不填写server和serverIssuer，服务器会根据配置中的单台服务器进行sequence进行交易。
-* sequence若不填写，则服务器会进行默认的单笔交易，若填写，服务器会进行带上sequence的交易
-
-##### 参数介绍
-
-| 参数         | 类型    | 说明                                        |
-|--------------|---------|-------------------------------------------|
-| server       | String? | 指定的连接单台服务器节点的地址              |
-| serverIssuer | String? | 指定的连接单台服务器节点的发行商            |
-| sequence     | String? | 发起账号的sequence                          |
-| account      | String  | 发起账号                                    |
-| to           | String  | 目标账号                                    |
-| value        | String  | 支付数量                                    |
-| currency     | String  | 货币种类，三到六个字母或 20 字节的自定义货币 |
-| issuer       | String  | 货币发行方，无则留 ''                        |
-| secret       | String  | 井通钱包私钥                                |
-| addMemo      | String? | 备注信息                                    |
-
-##### 参数示例
-
-```JSON
-{
-  "server":"ws://106.54.116.47:5020",
-  "serverIssuer":"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS",
-  "sequence":"4122",
-  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
-  "value":"0.01",
-  "currency":"TEST",
-  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-  "addMemo":"测试"
-}
-```
-
-#### cURL
-
-```curl
-curl --location --request POST "{{host}}/tx/serial" \
---header "Content-Type: application/json" \
---data "{
-  \"server\":\"ws://106.54.116.47:5020\",
-  \"serverIssuer\":\"jBciDE8Q3uJjf111VeiUNM775AMKHEbBLS\",
-  \"sequence\":\"4122\",
-  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
-  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
-  \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
-  \"value\":\"0.01\",
-  \"currency\":\"TEST\",
-  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
-  \"addMemo\":\"测试\"
-}"
-```
-#### 返回值示例
-
-```JSON
-{
-    "success": true,
-    "msg": "请求成功",
-    "code": 0,
-    "data": {
-        "engine_result": "tesSUCCESS",
-        "engine_result_code": 0,
-        "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
-        "tx_blob": "1200002200000000240000102161D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100C082DAB4DB4534908F21B2D20EA31086A2C8D7159C614E88D83DADD5461BB49D0220106CFD6AD424AA64248C9B95945F2BC6A2119C20C7076158CB5579C4B6F6F6FE8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D06E6B58BE8AF95E1F1",
-        "tx_json": {
-            "Account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-            "Amount": {
-                "currency": "TEST",
-                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-                "value": "0.01"
-            },
-            "Destination": "jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
-            "Fee": "10000",
-            "Flags": 0,
-            "Memos": [
-                {
-                    "Memo": {
-                        "MemoData": "E6B58BE8AF95"
-                    }
-                }
-            ],
-            "Sequence": 4129,
-            "SigningPubKey": "0256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C",
-            "TransactionType": "Payment",
-            "TxnSignature": "3045022100C082DAB4DB4534908F21B2D20EA31086A2C8D7159C614E88D83DADD5461BB49D0220106CFD6AD424AA64248C9B95945F2BC6A2119C20C7076158CB5579C4B6F6F6FE",
-            "hash": "AAACDEB43EC8B70EDF84201F2BA60293A22064F94F8DB9630539538092101E4F"
-        }
-    }
-}
-```
-#### 返回值解析
-
-| 参数                         | 类型    | 说明                   |
-|------------------------------|---------|----------------------|
-| success                      | Boolean | 此次请求是否成功       |
-| msg                          | String  | 返回的信息             |
-| code                         | Integer | 服务器返回的请求状态码 |
-| data                         | Object  | SWTC-LIB 返回的数据    |
-| data.engine_result           | String  | 请求结果               |
-| data.engine_result_code      | Array   | 请求结果编码           |
-| data.engine_result_message   | String  | 请求结果 message 信息  |
-| data.tx_blob                 | String  | 16 进制签名后的交易    |
-| data.tx_json                 | Object  | 交易内容               |
-| data.tx_json.Account         | String  | 账号地址               |
-| data.tx_json.Amount          | String  | 交易金额               |
-| data.tx_json.Destination     | String  | 对家                   |
-| data.tx_json.Fee             | String  | 交易费                 |
-| data.tx_json.Flags           | Integer | 交易标记               |
-| data.tx_json.Memos           | Array   | 备注                   |
-| data.tx_json.Sequence        | Integer | 单子序列号             |
-| data.tx_json.SigningPubKey   | Object  | 签名公钥               |
-| data.tx_json.TransactionType | String  | 交易类型               |
-| data.tx_json.TxnSignature    | String  | 交易签名               |
-| data.tx_json.hash            | String  | 交易 hash              |
-
-### 5.4 不需要sequence的串行批量支付
+### 5.4 批量支付
 
 #### 类型 
 
@@ -1357,7 +1213,7 @@ POST
 
 #### 描述
 
-不需要sequence的串行批量支付
+批量支付
 
 
 #### 请求地址
@@ -1369,16 +1225,17 @@ POST
 
 ##### 参数介绍
 
-| 参数           | 类型    | 说明                                        |
-|----------------|---------|-------------------------------------------|
-| account        | String  | 发起账号                                    |
-| secret         | String  | 井通钱包私钥                                |
-| tx             | Array   | 需要交易的地址对                            |
-| tx[0].to       | String  | 目标账号                                    |
-| tx[0].value    | String  | 支付数量                                    |
-| tx[0].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币 |
-| tx[0].issuer   | String  | 货币发行方，无则留 ''                        |
-| tx[0].addMemo  | String? | 备注信息                                    |
+| 参数           | 类型    | 说明                                                        |
+|----------------|---------|-----------------------------------------------------------|
+| account        | String  | 发起账号                                                    |
+| secret         | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| tx             | Array   | 需要交易的地址对                                            |
+| rsa            | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
+| tx[0].to       | String  | 目标账号                                                    |
+| tx[0].value    | String  | 支付数量                                                    |
+| tx[0].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| tx[0].issuer   | String  | 货币发行方，无则留 ''                                        |
+| tx[0].addMemo  | String? | 备注信息                                                    |
 
 ##### 参数示例
 
@@ -1386,6 +1243,7 @@ POST
 {
   "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
   "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "rsa":"false",
   "tx":[
     {
       "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
@@ -1420,6 +1278,7 @@ curl --location --request POST "{{host}}/tx/limit" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
   \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+  \"rsa\":\"false\",
   \"tx\":[
     {
       \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
@@ -1511,6 +1370,591 @@ curl --location --request POST "{{host}}/tx/limit" \
 | data[0].data.Sequence              | Integer | 单子序列号                             |
 | data[0].data.hash                  | String  | 交易 hash                              |
 
+### 5.5 签名支付
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+签名支付
+
+
+#### 请求地址
+```
+{{host}}/tx/blob
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数 | 类型   | 说明         |
+|------|--------|------------|
+| blob | String | 签名后的blob |
+
+##### 参数示例
+
+```JSON
+{
+  "blob":"120000220000000024000018B261D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100ACD6B696B480AF42B929101FEDDA2B72FE36553415A12A41E3CBA770EBE4F616022047744119D76D9F700ED64705A4EEFD0929C7511D1865002A7611CC66548580BD8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869A"
+}
+```
+
+#### cURL
+
+```curl
+curl --location --request POST '{{host}}/tx/blob' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'blob=120000220000000024000018B261D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100ACD6B696B480AF42B929101FEDDA2B72FE36553415A12A41E3CBA770EBE4F616022047744119D76D9F700ED64705A4EEFD0929C7511D1865002A7611CC66548580BD8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869A'
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": {
+        "engine_result": "tesSUCCESS",
+        "engine_result_code": 0,
+        "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
+        "tx_blob": "120000220000000024000018B461D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100EBF00D6DA4AFABD85871EE8779A020D52D8F424C221AA657830F28E1FE6BCE20022060E33DB8A6B54E9F1A2EA236D7BBDDF031AD0269FE56910B8180E7D48A6D601A8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D06E6B58BE8AF95E1F1",
+        "tx_json": {
+            "Account": "jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+            "Amount": {
+                "currency": "TEST",
+                "issuer": "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+                "value": "0.01"
+            },
+            "Destination": "jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
+            "Fee": "10000",
+            "Flags": 0,
+            "Memos": [
+                {
+                    "Memo": {
+                        "MemoData": "E6B58BE8AF95"
+                    }
+                }
+            ],
+            "Sequence": 6324,
+            "SigningPubKey": "0256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C",
+            "TransactionType": "Payment",
+            "TxnSignature": "3045022100EBF00D6DA4AFABD85871EE8779A020D52D8F424C221AA657830F28E1FE6BCE20022060E33DB8A6B54E9F1A2EA236D7BBDDF031AD0269FE56910B8180E7D48A6D601A",
+            "hash": "9EF75982726A5B32EC8417C3D3427572DA6342C50D39A83A47D68CD22181A9C6"
+        }
+    }
+}
+```
+
+#### 返回值解析
+
+| 参数                         | 类型    | 说明                   |
+|------------------------------|---------|----------------------|
+| success                      | Boolean | 此次请求是否成功       |
+| msg                          | String  | 返回的信息             |
+| code                         | Integer | 服务器返回的请求状态码 |
+| data                         | Object  | SWTC-LIB 返回的数据    |
+| data.engine_result           | String  | 请求结果               |
+| data.engine_result_code      | Array   | 请求结果编码           |
+| data.engine_result_message   | String  | 请求结果 message 信息  |
+| data.tx_blob                 | String  | 16 进制签名后的交易    |
+| data.tx_json                 | Object  | 交易内容               |
+| data.tx_json.Account         | String  | 账号地址               |
+| data.tx_json.Amount          | String  | 交易金额               |
+| data.tx_json.Destination     | String  | 对家                   |
+| data.tx_json.Fee             | String  | 交易费                 |
+| data.tx_json.Flags           | Integer | 交易标记               |
+| data.tx_json.Memos           | Array   | 备注                   |
+| data.tx_json.Sequence        | Integer | 单子序列号             |
+| data.tx_json.SigningPubKey   | Object  | 签名公钥               |
+| data.tx_json.TransactionType | String  | 交易类型               |
+| data.tx_json.TxnSignature    | String  | 交易签名               |
+| data.tx_json.hash            | String  | 交易 hash              |
+
+### 5.6 批量签名支付
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+批量签名支付
+
+
+#### 请求地址
+```
+{{host}}/tx/multiple
+```
+
+#### 参数说明
+
+此接口内部的blob是按照（6.2）批量签名返回的顺序进行提交，blob内部带有sequence的序列，请组装的时候也必须按照顺序进行组装使用
+
+##### 参数介绍
+
+| 参数           | 类型   | 说明             |
+|----------------|--------|----------------|
+| txBlob         | Array  | 签名后的blob数组 |
+| txBlob[0].blob | String | 签名后的blob     |
+
+##### 参数示例
+
+```JSON
+{
+    "txBlob": [
+        {
+            "blob": "120000220000000024000018AF61D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74463044022024146703D92E1597492600044E42AD5C4428BA90FA5249B70C59B03A3BC797730220394577D634D37670F372035A04B764903E9824D089A22E4132BDAF5B5AAE090A8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9531E1F1"
+        },
+        {
+            "blob": "120000220000000024000018B061D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C7446304402205E6919EC4C0A61FB8B76A86BAA28C6D5012E77DFB5C4248615C6428B8E2A7D1902203C2F69C56E5F6EA6CFC69718F55F6BEC133EBB73ACE18EA5AA0F4EBD64AE49A28114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9532E1F1"
+        },
+        {
+            "blob": "120000220000000024000018B161D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100BC123E3CFFCEBE37E0B7D62D80501ACA0CD9D8E16DC0A7A0CE3FBAF2BE04BCE7022067674CBF1288F5AFD938B4F4A11D87AADDFF1C1C7E3415B1BEFF60EE44A7516B8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869A"
+        }
+    ]
+}
+```
+
+#### cURL
+
+```curl
+curl --location --request POST '{{host}}/tx/multiple' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "txBlob": [
+        {
+            "blob": "120000220000000024000018AF61D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74463044022024146703D92E1597492600044E42AD5C4428BA90FA5249B70C59B03A3BC797730220394577D634D37670F372035A04B764903E9824D089A22E4132BDAF5B5AAE090A8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9531E1F1"
+        },
+        {
+            "blob": "120000220000000024000018B061D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C7446304402205E6919EC4C0A61FB8B76A86BAA28C6D5012E77DFB5C4248615C6428B8E2A7D1902203C2F69C56E5F6EA6CFC69718F55F6BEC133EBB73ACE18EA5AA0F4EBD64AE49A28114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9532E1F1"
+        },
+        {
+            "blob": "120000220000000024000018B161D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74473045022100BC123E3CFFCEBE37E0B7D62D80501ACA0CD9D8E16DC0A7A0CE3FBAF2BE04BCE7022067674CBF1288F5AFD938B4F4A11D87AADDFF1C1C7E3415B1BEFF60EE44A7516B8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869A"
+        }
+    ]
+}'
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": [
+        {
+            "success": true,
+            "msg": "连接成功,交易结果为tesSUCCESS",
+            "index": "0",
+            "data": {
+                "engine_result": "tesSUCCESS",
+                "engine_result_code": 0,
+                "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
+                "sequence": 6325,
+                "hash": "3308120268ADE1D2EB44382DCE024E2E8C12E0BB9D15D8A3B3B6AC01B6259E00"
+            }
+        },
+        {
+            "success": true,
+            "msg": "连接成功,交易结果为tesSUCCESS",
+            "index": "1",
+            "data": {
+                "engine_result": "tesSUCCESS",
+                "engine_result_code": 0,
+                "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
+                "sequence": 6326,
+                "hash": "4BC4AE3D35BFA70C8C4C5669CD898D00D422D921B65C969BCA8A492EDEF0032F"
+            }
+        },
+        {
+            "success": true,
+            "msg": "连接成功,交易结果为tesSUCCESS",
+            "index": "2",
+            "data": {
+                "engine_result": "tesSUCCESS",
+                "engine_result_code": 0,
+                "engine_result_message": "The transaction was applied. Only final in a validated ledger.",
+                "sequence": 6327,
+                "hash": "04734C94EB67B9E92DDBB59C93F7456A53EE19E218090BBC9BB2EEFFB2C2688E"
+            }
+        }
+    ]
+}
+```
+
+#### 返回值解析
+
+| 参数                               | 类型    | 说明                                   |
+|------------------------------------|---------|--------------------------------------|
+| success                            | Boolean | 此次请求是否成功                       |
+| msg                                | String  | 返回的信息                             |
+| code                               | Integer | 服务器返回的请求状态码                 |
+| data                               | Array   | 每一笔交易返回的数据                   |
+| data[0].success                    | String  | 这一笔交易在提交到公共节点上是否有错误 |
+| data[0].msg                        | String  | 这一笔交易在提交到公共节点上的提示信息 |
+| data[0].index                      | String  | 每一笔在整个交易数组中的底标           |
+| data[0].data                       | Array   | SWTC-LIB 返回的精简数据                |
+| data[0].data.engine_result         | String  | 请求结果，根据是否为tesSUCCESS判断成功  |
+| data[0].data.engine_result_code    | Integer | 请求结果编码                           |
+| data[0].data.engine_result_message | String  | 请求结果 message 信息                  |
+| data[0].data.Sequence              | Integer | 单子序列号                             |
+| data[0].data.hash                  | String  | 交易 hash                              |
+
+## 签名相关
+
+### 6.1 服务器签名
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+本地签名的服务器端解决方案，此接口支持RSA加密私钥，此接口支持指定Sequence。
+
+#### 请求地址
+```
+{{host}}/signature/pay
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数     | 类型    | 说明                                                        |
+|----------|---------|-----------------------------------------------------------|
+| account  | String  | 发起账号                                                    |
+| to       | String  | 目标账号                                                    |
+| value    | String  | 支付数量                                                    |
+| currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| issuer   | String  | 货币发行方，无则留 ''                                        |
+| secret   | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| addMemo  | String? | 备注信息                                                    |
+| sequence | String? | 此次签名里面添加的sequence，不传则是默认下一次的sequence     |
+| rsa      | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
+
+##### 参数示例
+
+```JSON
+{
+  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+  "to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
+  "value":"0.01",
+  "currency":"SWT",
+  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "addMemo":"测试",
+  "sequence":"6285",
+  "rsa":"false"
+}
+```
+
+#### cURL
+
+```curl
+curl --location --request POST "{{host}}/tx/pay" \
+--header "Content-Type: application/json" \
+--data "{
+  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+  \"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
+  \"value\":\"0.01\",
+  \"currency\":\"SWT\",
+  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+  \"addMemo\":\"测试\",
+  \"sequence\":\"6285\",
+  \"rsa\":\"false\",
+}"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": "120000220000000024000018B861D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74463044022016586A1E27F5882B769864219485E3412B3DF47D02FAF46CA90CB8D0A9A4959302204201C5E4BC94C10A4645FB50B1175B0B2D1E4062C9D36C90C869C0A35F2FA4AA8114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D06E6B58BE8AF95E1F1"
+}
+```
+#### 返回值解析
+
+| 参数    | 类型    | 说明                   |
+|---------|---------|----------------------|
+| success | Boolean | 此次请求是否成功       |
+| msg     | String  | 返回的信息             |
+| code    | Integer | 服务器返回的请求状态码 |
+| data    | String  | 签名信息               |
+
+### 6.2 服务器批量签名
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+服务器批量签名，此接口默认后台会获取到sequence，不需要自行管理
+
+
+#### 请求地址
+```
+{{host}}/signature/limit
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数           | 类型    | 说明                                                        |
+|----------------|---------|-----------------------------------------------------------|
+| account        | String  | 发起账号                                                    |
+| secret         | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| tx             | Array   | 需要交易的地址对                                            |
+| rsa            | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
+| tx[0].to       | String  | 目标账号                                                    |
+| tx[0].value    | String  | 支付数量                                                    |
+| tx[0].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| tx[0].issuer   | String  | 货币发行方，无则留 ''                                        |
+| tx[0].addMemo  | String? | 备注信息                                                    |
+
+##### 参数示例
+
+```JSON
+{
+  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "rsa":"false",
+  "tx":[
+    {
+      "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
+      "value":"0.01",
+      "currency":"TEST",
+      "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+      "addMemo":"测试1"
+    },
+    {
+      "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
+      "value":"0.01",
+      "currency":"TEST",
+      "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+      "addMemo":"测试2"
+    },
+    {
+      "to":"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i",
+      "value":"0.01",
+      "currency":"TEST",
+      "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+      "addMemo":"测试2"
+    }
+  ]
+}
+```
+
+#### cURL
+
+```curl
+curl --location --request POST "{{host}}/signature/limit" \
+--header "Content-Type: application/json" \
+--data "{
+  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+  \"rsa\":\"false\",
+  \"tx\":[
+    {
+      \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
+      \"value\":\"0.01\",
+      \"currency\":\"TEST\",
+      \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+      \"addMemo\":\"测试1\"
+    },
+    {
+      \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
+      \"value\":\"0.01\",
+      \"currency\":\"TEST\",
+      \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+      \"addMemo\":\"测试2\"
+    },
+    {
+      \"to\":\"jpUCa7JwSbwvU1adNXRN7BWzTeVsTiNp1i\",
+      \"value\":\"0.01\",
+      \"currency\":\"TEST\",
+      \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+      \"addMemo\":\"测试2\"
+    }
+  ]
+}"
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": [
+        "120000220000000024000018B561D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C7446304402203454942369C11B47AE13CCE10BE600FE3286523DC03F678B579FBEE214A3BE6E0220761D4AAA976F0065622C1BE27F8B6DDAA047CEBFBFB9B4A99DEFBEC9C210D3028114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9531E1F1",
+        "120000220000000024000018B661D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C74463044022050398377192CEBA0B6941E3EC00E2C7DEC256F3F00939B0EFF2464BE6734D1FF02207C6729C570E379E0A82E6A90E0A5E786A4DFBADF138123C846B5D4487F1EFAB38114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869AF9EA7D07E6B58BE8AF9532E1F1",
+        "120000220000000024000018B761D4038D7EA4C680000000000000000000000000544553540000000000A582E432BFC48EEDEF852C814EC57F3CD2D4159668400000000000271073210256F9ED0A13D879E2DAC205A23CF1BA6DA210C094F3B18168945BBCD0664BAD0C7446304402207A8F843FBD1E235E3F53252F217A486B8F8C049A50BDAEBB81E3B1E231199E1E02205980D4BD55EC2EA7DF67F6BFF54090FBD861A5F1E9A37F2ADC47FC0B058AF5648114C1D4C79B2C9CD8FE9AB1EE29FAA18432A3DBFD8A83140D2C803B102F69C7AF902747C0CE6B0C90CF869A"
+    ]
+}
+```
+
+#### 返回值解析
+
+| 参数    | 类型    | 说明                         |
+|---------|---------|----------------------------|
+| success | Boolean | 此次请求是否成功             |
+| msg     | String  | 返回的信息                   |
+| code    | Integer | 服务器返回的请求状态码       |
+| data    | Array   | 每一笔签名提交返回的签名数组 |
+| data[0] | String  | 对应的签名信息               |
+
+## 安全相关
+
+### 说明
+
+一、 为了私钥的安全性，SWTCLIB-APP采用了加密私钥传输的方案。遵循以下几个原则
+
+* 私钥不出本机
+* 私钥不在网络流通
+* 服务器不存储任何私钥信息
+* 所有需要传递私钥的接口都支持两种方式：
+  1. RSA加密进行安全传输
+  2. 默认的明文传输方式
+
+二、 加密方式
+
+* 加密方式为 RSA PKCS1 512 对称加密
+* 服务器存储公钥和私钥，并把公钥公布给客户端
+* 客户端获取公钥之后，请按照加密方案进行加密
+* 服务器每天 03:00 进行更新一次公私钥对，并且发放新公钥
+* 在 03:00 - 04:00 为缓冲区，新旧公钥都可用，04:00 之后只有新公钥可用。
+
+三、 进行验证
+
+* 系统提供一个接口来验证加密后的结果是否和原文一致，只是验证一致性
+* 可以通过其他需要私钥的接口进行操作验证
+
+### 7.1 获取RSA公钥
+
+#### 类型 
+
+GET 
+
+#### 描述
+
+获取最新可用的RSA公钥
+
+#### 请求地址
+```
+{{host}}/rsa/public
+```
+
+#### 参数说明
+
+无
+
+##### 参数介绍
+
+无
+
+##### 参数示例
+
+无
+
+#### cURL
+
+```curl
+curl --location --request GET '{{host}}/rsa/public'
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": "-----BEGIN RSA PUBLIC KEY-----\nMEgCQQCTXpw3qIlY0RQb1nEF7l1ZHFd94HlM+FF6LBThXNvZ2QjfqkxOvwiORsnh\nMP3YCLYf2CgUR6ywMukI16CGU1JJAgMBAAE=\n-----END RSA PUBLIC KEY-----"
+}
+```
+#### 返回值解析
+
+| 参数    | 类型    | 说明                   |
+|---------|---------|----------------------|
+| success | Boolean | 此次请求是否成功       |
+| msg     | String  | 返回的信息             |
+| code    | Integer | 服务器返回的请求状态码 |
+| data    | String  | 最新的公钥信息         |
+
+### 7.2 验证RSA密文的正确性
+
+#### 类型 
+
+POST 
+
+#### 描述
+
+验证客户端提供的明文和密文是否对应
+
+#### 请求地址
+```
+{{host}}/rsa/verify
+```
+
+#### 参数说明
+
+##### 参数介绍
+
+| 参数       | 类型   | 说明                    |
+|------------|--------|-----------------------|
+| plaintext  | String | 明文                    |
+| ciphertext | String | 使用RSA公钥加密后的密文 |
+
+##### 参数示例
+
+```JSON
+{
+  "plaintext":"jfTqijsayy6W8uNB3FQCV2N5HzbApWBBs6",
+  "ciphertext":"XUMgOP5O85PIjSSSHejZIFRwkcSCNq+vqGKDeDKdqleCEj5NO45oEd05ETt9xU9ZFWb2Uj06mH+6kk26yIb42DLbw0+6JV2uyesT1rGAzwJvOpxOhnq5qlHBtu3f6rQCMBS5i0Go3BI+RdXAl8WD67IW2wryGfE3AxB/wk2TpR0=",
+}
+```
+
+#### cURL
+
+```curl
+curl --location --request POST '{{host}}/rsa/verify' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'plaintext=jfTqijsayy6W8uNB3FQCV2N5HzbApWBBs6' \
+--data-urlencode 'ciphertext=XUMgOP5O85PIjSSSHejZIFRwkcSCNq+vqGKDeDKdqleCEj5NO45oEd05ETt9xU9ZFWb2Uj06mH+6kk26yIb42DLbw0+6JV2uyesT1rGAzwJvOpxOhnq5qlHBtu3f6rQCMBS5i0Go3BI+RdXAl8WD67IW2wryGfE3AxB/wk2TpR0='
+```
+#### 返回值示例
+
+```JSON
+{
+    "success": true,
+    "msg": "请求成功",
+    "code": 0,
+    "data": null
+}
+// 或者
+{
+    "success": false,
+    "msg": "公钥或加密方式不对!",
+    "code": 400000,
+    "data": null
+}
+```
+
+#### 返回值解析
+
+| 参数    | 类型    | 说明                   |
+|---------|---------|----------------------|
+| success | Boolean | 此次请求是否成功       |
+| msg     | String  | 返回的信息             |
+| code    | Integer | 服务器返回的请求状态码 |
 
 ## 监听事件
 
@@ -1518,48 +1962,19 @@ curl --location --request POST "{{host}}/tx/limit" \
 - 监听所有交易(transactions)
 - 监听所有账本(ledger_closed)
 
-监听结果为标准的websock返回信息。
+监听结果为标准的websocket返回信息。
 
 #### 使用说明
 
-使用的是标准WS链接，测试地址为 ws://39.108.227.152:7900
+使用的是标准WS链接，测试地址为 ws://152.136.110.80
 
 监听如下两个事件：
 - transactions
 - ledger_closed
 
-#### 代码示例
+#### 示例网址
 
-```JavaScript
-<script src="./dist/socket.io.js"></script>
-  <script>
-    let serverHost = 'ws://127.0.0.1:7001';
-    serverHost = 'ws://127.0.0.1:7900';
-    var socket = io(serverHost);
-    socket.on('connect', function(data){
-      console.log(`connect->${serverHost}。获取到的socketId->${socket.id}`);
-      console.log('开始接收交易和账本信息，如下所示(只打印hash)：');
-    });
-    socket.on('transactions', function(data){
-      // console.log('transactions',data);
-      console.log('transactions',data.transaction.hash);
-    });
-    socket.on('ledger_closed', function(data){
-      // console.log('ledger_closed',data);
-      console.log('ledger_closed',data.ledger_hash);
-    });
-    socket.on('disconnect', function(data){
-      console.log('disconnect',data);
-    });
-  </script>
-```
-#### 可执行代码样例Exampl
-
-代码样例在工程目录，example文件夹下面
-
-#### 返回值
-
-返回值根据SWTC-LIB，原封返回
+[点击访问](http://152.136.110.80/socket/swtc-socket-test/1.html)
 
 ## 附录
 
@@ -1576,3 +1991,39 @@ curl --location --request POST "{{host}}/tx/limit" \
 | 500xxx | 服务器出错         |
 | 500000 | 服务器内部错误     |
 | 503xxx | 服务器维护或者宕机 |
+
+## 更新说明
+
+> 当前版本 v1.1.0
+
+### v1.1.0
+
+- 新增：签名相关-服务器签名
+- 新增：签名相关-服务器批量签名
+- 新增：交易相关-签名支付
+- 新增：交易相关-批量签名支付
+- 新增：安全相关-获取服务器RSA公钥
+- 新增：安全相关-验证RSA密文的正确性
+- 新增：部署-负载部署支持
+- 修改：所有需要私钥的接口支持RSA
+- 修改：批量支付单次最大支付笔数为1000的限制
+- 修改：一些BUG问题修复
+- 移除：移除接口-5.3 需要sequence的串行批量支付
+- 移除：文档内有关项目部署的方法
+
+
+### v1.0.3
+
+- 更新路由的请求方式
+
+### v1.0.2
+
+- 更新服务器启动配置
+
+### v1.0.1
+
+- 更新swtc-lib库的版本，取消批量转账比数的限制
+
+### v1.0.0
+
+- 项目初始化
