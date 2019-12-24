@@ -204,6 +204,7 @@
   - [附录](#附录)
     - [附录1:返回值Code说明](#附录1返回值code说明)
   - [更新说明](#更新说明)
+    - [v1.1.1](#v111)
     - [v1.1.0](#v110)
     - [v1.0.3](#v103)
     - [v1.0.2](#v102)
@@ -409,7 +410,7 @@ POST
 | 参数   | 类型    | 说明                                                        |
 |--------|---------|-----------------------------------------------------------|
 | secret | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
-| rsa    | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
+| rsa    | String? | 是否采用RSA加密，加密为'true'，不加密为‘false’ ，默认不加密 |
 
 ##### 参数示例
 
@@ -612,10 +613,10 @@ curl --location --request GET "{{host}}/account/:account/balances?currency=CSP&i
 | code                      | Integer | 服务器返回的请求状态码 |
 | data                      | Object  | SWTC-LIB 返回的数据    |
 | data.balances             | Array   | 余额信息的数组         |
-| data.balances[0].value    | String  | 余额，小数点后六位      |
-| data.balances[0].currency | String  | 币种                   |
-| data.balances[0].issuer   | String  | 发行商                 |
-| data.balances[0].freezed  | String  | 冻结数，小数点后六位    |
+| data.balances[n].value    | String  | 余额，小数点后六位      |
+| data.balances[n].currency | String  | 币种                   |
+| data.balances[n].issuer   | String  | 发行商                 |
+| data.balances[n].freezed  | String  | 冻结数，小数点后六位    |
 
 ### 3.3 获得账号交易列表
 
@@ -710,18 +711,18 @@ curl --location --request GET "{{host}}/account/:account/tx?limit=10&forward=asc
 | data.ledger_index_min                | Integer | 当前节点缓存的账本区间最小值 |
 | data.marker                          | Object  | 查到的当前记录标记           |
 | data.transactions                    | Array   | 交易记录列表                 |
-| data.transactions[0].date            | Integer | 时间戳                       |
-| data.transactions[0].hash            | String  | 交易hash                     |
-| data.transactions[0].type            | String  | 交易类型                     |
-| data.transactions[0].fee             | String  | 手续费                       |
-| data.transactions[0].result          | String  | 交易结果                     |
-| data.transactions[0].memos           | Array   | 备注                         |
-| data.transactions[0].counterparty    | String  | 交易对家                     |
-| data.transactions[0].amount          | Object  | 交易金额对象                 |
-| data.transactions[0].amount.value    | String  | 金额                         |
-| data.transactions[0].amount.currency | String  | 货币种类                     |
-| data.transactions[0].amount.issuer   | String  | 货币                         |
-| data.transactions[0].effects         | Array   | 交易效果                     |
+| data.transactions[n].date            | Integer | 时间戳                       |
+| data.transactions[n].hash            | String  | 交易hash                     |
+| data.transactions[n].type            | String  | 交易类型                     |
+| data.transactions[n].fee             | String  | 手续费                       |
+| data.transactions[n].result          | String  | 交易结果                     |
+| data.transactions[n].memos           | Array   | 备注                         |
+| data.transactions[n].counterparty    | String  | 交易对家                     |
+| data.transactions[n].amount          | Object  | 交易金额对象                 |
+| data.transactions[n].amount.value    | String  | 金额                         |
+| data.transactions[n].amount.currency | String  | 货币种类                     |
+| data.transactions[n].amount.issuer   | String  | 货币                         |
+| data.transactions[n].effects         | Array   | 交易效果                     |
 
 ## 账本相关
 
@@ -857,7 +858,7 @@ curl --location --request GET "{{host}}/ledgers/hash/:hash?transactions=true"
 | data.total_coins            | String  | swt 总量               |
 | data.transaction_hash       | String  | 交易 hash 树根         |
 | data.transactions           | Array   | 该账本里的交易列表     |
-| data.transactions[0]        | String  | 交易Hash               |
+| data.transactions[n]        | String  | 交易Hash               |
 
 ### 4.3 获取某一账本具体信息根据账本高度
 
@@ -943,7 +944,7 @@ curl --location --request GET "{{host}}/ledgers/index/:index?transactions=true"
 | data.total_coins            | String  | swt 总量               |
 | data.transaction_hash       | String  | 交易 hash 树根         |
 | data.transactions           | Array   | 该账本里的交易列表     |
-| data.transactions[0]        | String  | 交易Hash               |
+| data.transactions[n]        | String  | 交易Hash               |
 
 
 ## 交易事务相关
@@ -1097,20 +1098,21 @@ POST
 | currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
 | issuer   | String  | 货币发行方，无则留 ''                                        |
 | secret   | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| rsa      | String? | 是否采用RSA加密，加密为'true'，不加密为‘false’ ，默认不加密 |
 | addMemo  | String? | 备注信息                                                    |
-| rsa      | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
+
 
 ##### 参数示例
 
 ```JSON
 {
-  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-  "to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
-  "value":"0.01",
-  "currency":"SWT",
-  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-  "addMemo":"测试"
+	"account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+	"to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
+	"value":"0.01",
+	"currency":"SWT",
+	"issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+	"secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"addMemo":"测试"
 }
 ```
 
@@ -1120,13 +1122,13 @@ POST
 curl --location --request POST "{{host}}/tx/pay" \
 --header "Content-Type: application/json" \
 --data "{
-  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
-  \"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
-  \"value\":\"0.01\",
-  \"currency\":\"SWT\",
-  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
-  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
-  \"addMemo\":\"测试\"
+	\"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+	\"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
+	\"value\":\"0.01\",
+	\"currency\":\"SWT\",
+	\"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+	\"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+	\"addMemo\":\"测试\"
   \"rsa\":\"false\"
 }"
 ```
@@ -1213,12 +1215,19 @@ POST
 
 #### 描述
 
-批量支付
+批量支付是一个账号在短时间内向多个账号发起交易。因为服务器 sequence 控制比较复杂，所以才有这个接口，系统自动管理sequence。
+
+适用场景：
+  1. 新注册用户发放奖励，平台配置一个发放币的账号采用此接口批量转账
+  2. 抢红包，并发量大的场景。使用此接口
+  3. 收益分发，等分发场景
+  4. 新用户激活账户，一个账号给大批账号转SWT的场景
+  5. ...
 
 
 #### 请求地址
 ```
-{{host}}/tx/limit
+{{host}}/tx/batch
 ```
 
 #### 参数说明
@@ -1229,13 +1238,13 @@ POST
 |----------------|---------|-----------------------------------------------------------|
 | account        | String  | 发起账号                                                    |
 | secret         | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| rsa            | String? | 是否采用RSA加密，加密为'true'，不加密为‘false’ ，默认不加密 |
 | tx             | Array   | 需要交易的地址对                                            |
-| rsa            | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
-| tx[0].to       | String  | 目标账号                                                    |
-| tx[0].value    | String  | 支付数量                                                    |
-| tx[0].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
-| tx[0].issuer   | String  | 货币发行方，无则留 ''                                        |
-| tx[0].addMemo  | String? | 备注信息                                                    |
+| tx[n].to       | String  | 目标账号                                                    |
+| tx[n].value    | String  | 支付数量                                                    |
+| tx[n].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| tx[n].issuer   | String  | 货币发行方，无则留 ''                                        |
+| tx[n].addMemo  | String? | 备注信息                                                    |
 
 ##### 参数示例
 
@@ -1273,7 +1282,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/tx/limit" \
+curl --location --request POST "{{host}}/tx/batch" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1360,15 +1369,15 @@ curl --location --request POST "{{host}}/tx/limit" \
 | msg                                | String  | 返回的信息                             |
 | code                               | Integer | 服务器返回的请求状态码                 |
 | data                               | Array   | 每一笔交易返回的数据                   |
-| data[0].success                    | String  | 这一笔交易在提交到公共节点上是否有错误 |
-| data[0].msg                        | String  | 这一笔交易在提交到公共节点上的提示信息 |
-| data[0].index                      | String  | 每一笔在整个交易数组中的底标           |
-| data[0].data                       | Array   | SWTC-LIB 返回的精简数据                |
-| data[0].data.engine_result         | String  | 请求结果，根据是否为tesSUCCESS判断成功  |
-| data[0].data.engine_result_code    | Integer | 请求结果编码                           |
-| data[0].data.engine_result_message | String  | 请求结果 message 信息                  |
-| data[0].data.Sequence              | Integer | 单子序列号                             |
-| data[0].data.hash                  | String  | 交易 hash                              |
+| data[n].success                    | String  | 这一笔交易在提交到公共节点上是否有错误 |
+| data[n].msg                        | String  | 这一笔交易在提交到公共节点上的提示信息 |
+| data[n].index                      | String  | 每一笔在整个交易数组中的底标           |
+| data[n].data                       | Array   | SWTC-LIB 返回的精简数据                |
+| data[n].data.engine_result         | String  | 请求结果，根据是否为tesSUCCESS判断成功  |
+| data[n].data.engine_result_code    | Integer | 请求结果编码                           |
+| data[n].data.engine_result_message | String  | 请求结果 message 信息                  |
+| data[n].data.Sequence              | Integer | 单子序列号                             |
+| data[n].data.hash                  | String  | 交易 hash                              |
 
 ### 5.5 签名支付
 
@@ -1498,7 +1507,7 @@ POST
 | 参数           | 类型   | 说明             |
 |----------------|--------|----------------|
 | txBlob         | Array  | 签名后的blob数组 |
-| txBlob[0].blob | String | 签名后的blob     |
+| txBlob[n].blob | String | 签名后的blob     |
 
 ##### 参数示例
 
@@ -1593,15 +1602,15 @@ curl --location --request POST '{{host}}/tx/multiple' \
 | msg                                | String  | 返回的信息                             |
 | code                               | Integer | 服务器返回的请求状态码                 |
 | data                               | Array   | 每一笔交易返回的数据                   |
-| data[0].success                    | String  | 这一笔交易在提交到公共节点上是否有错误 |
-| data[0].msg                        | String  | 这一笔交易在提交到公共节点上的提示信息 |
-| data[0].index                      | String  | 每一笔在整个交易数组中的底标           |
-| data[0].data                       | Array   | SWTC-LIB 返回的精简数据                |
-| data[0].data.engine_result         | String  | 请求结果，根据是否为tesSUCCESS判断成功  |
-| data[0].data.engine_result_code    | Integer | 请求结果编码                           |
-| data[0].data.engine_result_message | String  | 请求结果 message 信息                  |
-| data[0].data.Sequence              | Integer | 单子序列号                             |
-| data[0].data.hash                  | String  | 交易 hash                              |
+| data[n].success                    | String  | 这一笔交易在提交到公共节点上是否有错误 |
+| data[n].msg                        | String  | 这一笔交易在提交到公共节点上的提示信息 |
+| data[n].index                      | String  | 每一笔在整个交易数组中的底标           |
+| data[n].data                       | Array   | SWTC-LIB 返回的精简数据                |
+| data[n].data.engine_result         | String  | 请求结果，根据是否为tesSUCCESS判断成功  |
+| data[n].data.engine_result_code    | Integer | 请求结果编码                           |
+| data[n].data.engine_result_message | String  | 请求结果 message 信息                  |
+| data[n].data.Sequence              | Integer | 单子序列号                             |
+| data[n].data.hash                  | String  | 交易 hash                              |
 
 ## 签名相关
 
@@ -1613,7 +1622,7 @@ POST
 
 #### 描述
 
-本地签名的服务器端解决方案，此接口支持RSA加密私钥，此接口支持指定Sequence。
+本地签名的服务器端解决方案，此接口支持指定Sequence。
 
 #### 请求地址
 ```
@@ -1632,20 +1641,20 @@ POST
 | currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
 | issuer   | String  | 货币发行方，无则留 ''                                        |
 | secret   | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| rsa      | String? | 是否采用RSA加密，加密为'true'，不加密为‘false’ ，默认不加密 |
 | addMemo  | String? | 备注信息                                                    |
 | sequence | String? | 此次签名里面添加的sequence，不传则是默认下一次的sequence     |
-| rsa      | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
 
 ##### 参数示例
 
 ```JSON
 {
-  "account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
-  "to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
-  "value":"0.01",
-  "currency":"SWT",
-  "issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
-  "secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"account":"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC",
+	"to":"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR",
+	"value":"0.01",
+	"currency":"SWT",
+	"issuer":"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or",
+	"secret":"snXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   "addMemo":"测试",
   "sequence":"6285",
   "rsa":"false"
@@ -1658,13 +1667,13 @@ POST
 curl --location --request POST "{{host}}/tx/pay" \
 --header "Content-Type: application/json" \
 --data "{
-  \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
-  \"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
-  \"value\":\"0.01\",
-  \"currency\":\"SWT\",
-  \"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
-  \"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
-  \"addMemo\":\"测试\",
+	\"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
+	\"to\":\"jfAUjEen8cLvRmCGyZYYwumLEZG45PThiR\",
+	\"value\":\"0.01\",
+	\"currency\":\"SWT\",
+	\"issuer\":\"jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or\",
+	\"secret\":\"snXXXXXXXXXXXXXXXXXXXXXXXXXXX\",
+	\"addMemo\":\"测试\",
   \"sequence\":\"6285\",
   \"rsa\":\"false\",
 }"
@@ -1701,7 +1710,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/signature/limit
+{{host}}/signature/batch
 ```
 
 #### 参数说明
@@ -1712,13 +1721,13 @@ POST
 |----------------|---------|-----------------------------------------------------------|
 | account        | String  | 发起账号                                                    |
 | secret         | String  | 井通钱包私钥,如果rsa为'true',则使用加密后的私钥             |
+| rsa            | String? | 是否采用RSA加密，加密为'true'，不加密为‘false’ ，默认不加密 |
 | tx             | Array   | 需要交易的地址对                                            |
-| rsa            | String? | 是否采用RSA加密，不传默认为'false', 值为 'true' 或者 'false' |
-| tx[0].to       | String  | 目标账号                                                    |
-| tx[0].value    | String  | 支付数量                                                    |
-| tx[0].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
-| tx[0].issuer   | String  | 货币发行方，无则留 ''                                        |
-| tx[0].addMemo  | String? | 备注信息                                                    |
+| tx[n].to       | String  | 目标账号                                                    |
+| tx[n].value    | String  | 支付数量                                                    |
+| tx[n].currency | String  | 货币种类，三到六个字母或 20 字节的自定义货币                 |
+| tx[n].issuer   | String  | 货币发行方，无则留 ''                                        |
+| tx[n].addMemo  | String? | 备注信息                                                    |
 
 ##### 参数示例
 
@@ -1756,7 +1765,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/signature/limit" \
+curl --location --request POST "{{host}}/signature/batch" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1810,7 +1819,7 @@ curl --location --request POST "{{host}}/signature/limit" \
 | msg     | String  | 返回的信息                   |
 | code    | Integer | 服务器返回的请求状态码       |
 | data    | Array   | 每一笔签名提交返回的签名数组 |
-| data[0] | String  | 对应的签名信息               |
+| data[n] | String  | 对应的签名信息               |
 
 ## 安全相关
 
@@ -1994,7 +2003,15 @@ curl --location --request POST '{{host}}/rsa/verify' \
 
 ## 更新说明
 
-> 当前版本 v1.1.0
+> 当前版本 v1.1.1
+
+### v1.1.1
+
+- 更新：swtc-lib底层库更新到 v1.6.14
+- 修改：批量支付路由请求方式
+- 修改：服务器批量签名的路由请求方式
+- 修改文档相关的一些文案
+
 
 ### v1.1.0
 
