@@ -204,12 +204,6 @@
   - [附录](#附录)
     - [附录1:返回值Code说明](#附录1返回值code说明)
   - [更新说明](#更新说明)
-    - [v1.1.1](#v111)
-    - [v1.1.0](#v110)
-    - [v1.0.3](#v103)
-    - [v1.0.2](#v102)
-    - [v1.0.1](#v101)
-    - [v1.0.0](#v100)
 
 <!-- /TOC -->
 
@@ -1495,7 +1489,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/tx/multiple
+{{host}}/tx/batchblob
 ```
 
 #### 参数说明
@@ -1530,7 +1524,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST '{{host}}/tx/multiple' \
+curl --location --request POST '{{host}}/tx/batchblob' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "txBlob": [
@@ -1626,7 +1620,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/signature/pay
+{{host}}/sign/pay
 ```
 
 #### 参数说明
@@ -1710,7 +1704,7 @@ POST
 
 #### 请求地址
 ```
-{{host}}/signature/batch
+{{host}}/sign/batch
 ```
 
 #### 参数说明
@@ -1765,7 +1759,7 @@ POST
 #### cURL
 
 ```curl
-curl --location --request POST "{{host}}/signature/batch" \
+curl --location --request POST "{{host}}/sign/batch" \
 --header "Content-Type: application/json" \
 --data "{
   \"account\":\"jJCtKD2MbfYoVdQEbjTmbXmNiVkLBTknLC\",
@@ -1836,11 +1830,9 @@ curl --location --request POST "{{host}}/signature/batch" \
 
 二、 加密方式
 
-* 加密方式为 RSA PKCS1 512 对称加密
+* 加密方式为 RSA PKCS8 1024 非对称加密
 * 服务器存储公钥和私钥，并把公钥公布给客户端
 * 客户端获取公钥之后，请按照加密方案进行加密
-* 服务器每天 03:00 进行更新一次公私钥对，并且发放新公钥
-* 在 03:00 - 04:00 为缓冲区，新旧公钥都可用，04:00 之后只有新公钥可用。
 
 三、 进行验证
 
@@ -2003,44 +1995,4 @@ curl --location --request POST '{{host}}/rsa/verify' \
 
 ## 更新说明
 
-> 当前版本 v1.1.1
-
-### v1.1.1
-
-- 更新：swtc-lib底层库更新到 v1.6.14
-- 修改：批量支付路由请求方式
-- 修改：服务器批量签名的路由请求方式
-- 修改：文档相关的一些文案
-
-
-### v1.1.0
-
-- 新增：签名相关-服务器签名
-- 新增：签名相关-服务器批量签名
-- 新增：交易相关-签名支付
-- 新增：交易相关-批量签名支付
-- 新增：安全相关-获取服务器RSA公钥
-- 新增：安全相关-验证RSA密文的正确性
-- 新增：部署-负载部署支持
-- 修改：所有需要私钥的接口支持RSA
-- 修改：批量支付单次最大支付笔数为1000的限制
-- 修改：一些BUG问题修复
-- 移除：移除接口-5.3 需要sequence的串行批量支付
-- 移除：文档内有关项目部署的方法
-
-
-### v1.0.3
-
-- 更新路由的请求方式
-
-### v1.0.2
-
-- 更新服务器启动配置
-
-### v1.0.1
-
-- 更新swtc-lib库的版本，取消批量转账比数的限制
-
-### v1.0.0
-
-- 项目初始化
+[更新详细信息](./UPDATE.md)
