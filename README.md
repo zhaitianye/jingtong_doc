@@ -1,5 +1,7 @@
 # 井通科技-相关文档
 
+# 说明：此项目不再维护，若需文档请参照 https://swtclib-app.jingtumzs.com/
+
 ## 目录
 <!-- TOC -->
 
